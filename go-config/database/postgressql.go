@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/GuIDeZaK/ecom-app/go-config/config"
+	"github.com/GuIDeZaK/ecom-app/go-config/v4/config"
 	_ "github.com/lib/pq"
 )
 
@@ -56,7 +56,7 @@ func (m *PostgresDatabase) Open(options Options) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Sprintln("Configuring database connection on host: %s port: %d database: %s username: %s", options.Host, options.Port, options.DatabaseName, options.UserName)
+	fmt.Sprintf("Configuring database connection on host: %s port: %d database: %s username: %s", options.Host, options.Port, options.DatabaseName, options.UserName)
 	db.SetConnMaxIdleTime(options.ConnMaxLifetime)
 	db.SetMaxIdleConns(options.MaxIdleConns)
 	db.SetMaxOpenConns(options.MaxOpenConns)
