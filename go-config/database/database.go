@@ -3,6 +3,7 @@ package database
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/GuIDeZaK/ecom-app/go-config/v4/utils"
@@ -58,6 +59,16 @@ func BuildDns(options Options) (string, error) {
 	} else {
 		param = options.PARAM
 	}
-	fmt.Println(param)
+	if param == "" {
+		param = "sslmode=disable"
+	} else {
+		// ถ้า PARAM ไม่มี sslmode อยู่เลย → เติม sslmode=disable ต่อท้าย
+		if !strings.Contains(param, "sslmode=") {
+			param = param + " sslmode=disable"
+		}
+	}
+
+	// debug ดู param ได้
+	fmt.Println("PARAM:", param)
 	return fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%d ", options.UserName, options.Password, options.DatabaseName, options.Host, options.Port), nil
 }
