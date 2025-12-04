@@ -70,5 +70,18 @@ func BuildDns(options Options) (string, error) {
 
 	// debug ดู param ได้
 	fmt.Println("PARAM:", param)
-	return fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%d ", options.UserName, options.Password, options.DatabaseName, options.Host, options.Port), nil
+	// ---------- ประกอบ DSN (สำคัญ: ต่อ param เข้าไปด้วย) ----------
+	dsn := fmt.Sprintf(
+		"user=%s password=%s dbname=%s host=%s port=%d %s",
+		options.UserName,
+		options.Password,
+		options.DatabaseName,
+		options.Host,
+		options.Port,
+		param, // 👈 อันนี้แหละที่เมื่อกี้หายไป
+	)
+
+	fmt.Println("DSN:", dsn)
+
+	return dsn, nil
 }
