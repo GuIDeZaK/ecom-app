@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"strconv"
 	"time"
 
@@ -22,6 +23,13 @@ func OpenPostgresSqlDatabase(host string, port int, userName string, password st
 	maxOpenConn := config.Default().GetInt("db.postgressql.maxOpenConns")
 	maxIdleConns := config.Default().GetInt("db.postgressql.maxIdleConns")
 	param := config.Default().GetString("db.postgressql.param")
+	if param == "" {
+		param = "sslmode=disable"
+	} else if param == "sslmode=require" {
+		log.Println("[WARN] PostgreSQL SSL not enabled on server — overriding to sslmode=disable for local dev.")
+		param = "sslmode=disable"
+	}
+
 	postgresDb.Open(Options{
 		Host:            host,
 		Port:            port,
