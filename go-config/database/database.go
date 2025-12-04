@@ -30,6 +30,7 @@ type Database interface {
 }
 
 func BuildDns(options Options) (string, error) {
+	panic("🔥 NEW GO-CONFIG BUILD_DNS 🔥")
 	handleError := func(msg string) (string, error) { return "", errors.New(msg) }
 	if utils.IsBlank(options.UserName) {
 		return handleError("user name cannot be empty")
