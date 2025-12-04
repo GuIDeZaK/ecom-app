@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/GuIDeZaK/ecom-app/go-config/config"
+	_ "github.com/lib/pq"
 )
 
 type PostgresDatabase struct {
