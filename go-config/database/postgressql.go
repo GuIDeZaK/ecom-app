@@ -3,8 +3,10 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"go-config/config"
+	"strconv"
 	"time"
+
+	"github.com/GuIDeZaK/ecom-app/go-config/config"
 )
 
 type PostgresDatabase struct {
@@ -16,6 +18,7 @@ func OpenPostgresSqlDatabase(host string, port int, userName string, password st
 		db: nil,
 	}
 	connMaxLifetime := config.Default().GetString("db.postgressql.connMaxLifetime")
+	connMaxLifetimeInt, _ := strconv.Atoi(connMaxLifetime)
 	maxOpenConn := config.Default().GetInt("db.postgressql.maxOpenConns")
 	maxIdleConns := config.Default().GetInt("db.postgressql.maxIdleConns")
 	param := config.Default().GetString("db.postgressql.param")
@@ -25,7 +28,7 @@ func OpenPostgresSqlDatabase(host string, port int, userName string, password st
 		UserName:        userName,
 		Password:        password,
 		DatabaseName:    dbname,
-		ConnMaxLifetime: time.Duration(connMaxLifetime),
+		ConnMaxLifetime: time.Duration(connMaxLifetimeInt),
 		MaxOpenConns:    maxOpenConn,
 		MaxIdleConns:    maxIdleConns,
 		PARAM:           param,
@@ -39,7 +42,7 @@ func (m *PostgresDatabase) Open(options Options) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Sprintf("Opening database connection on host: %s port:%d database: %s username: %s", options.Host, options.Port, options.Database, options.Username)
+	fmt.Sprintf("Opening database connection on host: %s port:%d database: %s username: %s", options.Host, options.Port, options.DatabaseName, options.UserName)
 	db, err := sql.Open("postgres", dbs)
 	if err != nil {
 		panic(err)
