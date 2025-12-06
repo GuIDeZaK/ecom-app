@@ -4,6 +4,7 @@ go 1.24.3
 
 require (
 	github.com/fsnotify/fsnotify v1.9.0
+	github.com/lib/pq v1.10.9
 	github.com/spf13/viper v1.21.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
@@ -17,7 +18,6 @@ require (
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sourcegraph/conc v0.3.1-0.20240121214520-5f936abd7ae8 // indirect

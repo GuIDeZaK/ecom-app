@@ -31,7 +31,7 @@ func OpenOrmWithDatabase(database Database) (*OrmDB, error) {
 	return &ormDB, nil
 }
 
-func OpenOrm(host string, port int, user string, password string, dbname string) (*OrmDB, error) {
+func OpenOrmZ(host string, port int, user string, password string, dbname string) (*OrmDB, error) {
 	postgresDb, err := OpenPostgresSqlDatabase(host, port, user, password, dbname)
 	if err != nil {
 		return nil, err
